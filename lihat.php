@@ -34,15 +34,27 @@ if (isset($_GET['hapus'])) {
 
     <style>
 
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body{
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             background: #f4f6f9;
             padding: 40px;
         }
 
         h1{
+            margin-top: 20px;
             margin-bottom: 30px;
+            color: #333;
         }
+
+        /* =========================
+           BUTTON KEMBALI
+        ========================= */
 
         .kembali{
             text-decoration: none;
@@ -50,12 +62,25 @@ if (isset($_GET['hapus'])) {
             color: white;
             padding: 10px 15px;
             border-radius: 8px;
+            transition: 0.3s;
         }
+
+        .kembali:hover{
+            background: #0056b3;
+        }
+
+        /* =========================
+           GALLERY
+        ========================= */
 
         .gallery{
             margin-top: 30px;
+
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+
+            grid-template-columns:
+            repeat(auto-fit, minmax(250px,1fr));
+
             gap: 20px;
         }
 
@@ -64,6 +89,11 @@ if (isset($_GET['hapus'])) {
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover{
+            transform: translateY(-5px);
         }
 
         .card img{
@@ -77,6 +107,34 @@ if (isset($_GET['hapus'])) {
             text-align: center;
         }
 
+        .nama-file{
+            margin-bottom: 15px;
+            color: #444;
+            word-break: break-word;
+        }
+
+        /* =========================
+           BUTTON DOWNLOAD
+        ========================= */
+
+        .download{
+            display: inline-block;
+            text-decoration: none;
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .download:hover{
+            background: #1e7e34;
+        }
+
+        /* =========================
+           BUTTON HAPUS
+        ========================= */
+
         .hapus{
             display: inline-block;
             text-decoration: none;
@@ -85,10 +143,23 @@ if (isset($_GET['hapus'])) {
             padding: 10px 15px;
             border-radius: 8px;
             margin-top: 10px;
+            transition: 0.3s;
         }
 
         .hapus:hover{
             background: darkred;
+        }
+
+        /* =========================
+           KOSONG
+        ========================= */
+
+        .kosong{
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            color: #666;
         }
 
     </style>
@@ -109,9 +180,13 @@ if (isset($_GET['hapus'])) {
 
 $files = scandir($target_dir);
 
+$adaFile = false;
+
 foreach ($files as $file) {
 
     if ($file != "." && $file != "..") {
+
+        $adaFile = true;
 
         $path = $target_dir . $file;
 
@@ -123,8 +198,20 @@ foreach ($files as $file) {
 
             <div class='card-body'>
 
-                <p>$file</p>
+                <p class='nama-file'>$file</p>
 
+                <!-- BUTTON DOWNLOAD -->
+                <a 
+                    class='download'
+                    href='$path'
+                    download
+                >
+                    Unduh
+                </a>
+
+                <br><br>
+
+                <!-- BUTTON HAPUS -->
                 <a 
                     class='hapus'
                     href='?hapus=$file'
@@ -139,6 +226,16 @@ foreach ($files as $file) {
 
         ";
     }
+}
+
+// kalau belum ada file
+if (!$adaFile) {
+
+    echo "
+    <div class='kosong'>
+        Belum ada file yang diupload
+    </div>
+    ";
 }
 
 ?>
