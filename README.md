@@ -1,16 +1,16 @@
 # Screenshot Web Upload
 
 ## Home
-![Home](Home.png)
+![Home](SS/Home.png)
 
 ## Upload
-![Upload](Upload.png)
+![Upload](SS/Upload.png)
 
 ## Preview
-![Preview](Preview.png)
+![Preview](SS/Preview.png)
 
 ## Unduh
-![Unduh](Unduh.png)
+![Unduh](SS/Unduh.png)
 
 ## Hapus
-![Hapus](Hapus.png)
+![Hapus](SS/Hapus.png)
